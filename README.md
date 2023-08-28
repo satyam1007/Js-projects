@@ -1,4 +1,2 @@
 # j-projects
-This Is My All Javascript Files
-<br>
-Auther Satyam Mishra
+This Is My All Javascript Files. Auther - Satyam Mishra
