@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Shortcut Icon" href="images/img-1.png" />
+    <title>Stopwatch using html css and javascript</title>
+    <style>
+        html,
+        body {
+            background-color: #4169e1;
+            font-family: "Raleway", sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 400;
+        }
+
+        .container {
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .Show {
+            font-size: 50px;
+        }
+
+        button {
+            width: 150px;
+            height: 50px;
+            margin-left: 15px;
+            font-size: 25px;
+            cursor: pointer;
+            background-color: #fff;
+            border-radius: 10px;
+            border: none;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>VANILLA JAVASCRIPT STOPWATCH</h1>
+        <div class="buttons">
+            <div class="Show" id="Stopwatch">00 : 00 : 00 : 00</div>
+            <br>
+            <button style="background-color: #008000; color: #fff;" onclick="Start()">Start</button>
+            <button style="background-color: #ff0000; color: #fff;" onclick="Stop()">Stop</button>
+            <button style="background-color: #ffffff; color: #000;" onclick="Reset()">Reset</button>
+        </div>
+    </div>
+    <script>
+        let isStop = true;
+        let count = 0;
+        let sec = 0;
+        let min = 0;
+        let hr = 0;
+
+        function Start() {
+            if (isStop == true) {
+                isStop = false;
+                Timer();
+            };
+        };
+
+        function Timer() {
+            count = Number.parseInt(count);
+            sec = Number.parseInt(sec);
+            min = Number.parseInt(min);
+            hr = Number.parseInt(hr);
+            if (isStop == false) {
+                count++;
+
+                if (count == 100) {
+                    count = 0;
+                    sec++;
+                };
+
+                if (sec == 60) {
+                    sec = 60;
+                    min++;
+                };
+
+                if (min == 60) {
+                    min = 0;
+                    hr++;
+                };
+
+                if (count < 10) {
+                    count = "0" + count;
+                };
+
+                if (sec < 10) {
+                    sec = "0" + sec;
+                };
+
+                if (min < 10) {
+                    min = "0" + min
+                };
+
+                if (hr < 10) {
+                    hr = "0" + hr;
+                };
+
+                document.getElementById("Stopwatch").innerHTML = hr + " : " + min + " : " + sec + " : " + count;
+                // setTimeout("(Timer)()", 10);
+                setTimeout("(Timer)()", 10);
+            };
+        };
+
+        function Stop() {
+            isStop = true;
+        };
+
+        function Reset() {
+            isStop = true;
+            count = "00";
+            sec = "00";
+            min = "00";
+            hr = "00";
+
+            document.getElementById("Stopwatch").innerHTML = "00 : 00 : 00 : 00";
+        };
+    </script>
+</body>
+
+</html>

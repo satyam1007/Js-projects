@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Shortcut Icon" href="images/img-1.png" />
+    <title>Calculater using html css and javascript</title>
+    <style>
+        html,
+        body {
+            background-color: #000;
+            font-family: "Raleway", sans-serif;
+        }
+
+        .container .calculater {
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #input {
+            width: 211px;
+            height: 70px;
+            border: none;
+            border-top-right-radius: 2px;
+            border-top-left-radius: 2px;
+            pointer-events: none;
+            color: #000;
+            text-align: right;
+            font-size: 30px;
+            padding-right: 15px;
+        }
+
+        button {
+            width: 57px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 20px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            border-right: none;
+            background-color: #fff;
+        }
+
+        .btnZero {
+            width: 114px;
+            border-bottom-left-radius: 3px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .btndott {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .equal {
+            border-bottom-right-radius: 3px;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .orange {
+            background-color: #ff9f0a;
+            color: #fff;
+        }
+
+        .grey {
+            background-color: #ebebeb;
+        }
+
+        .red {
+            width: 13px;
+            height: 13px;
+            background-color: red;
+            border-radius: 100px;
+            cursor: pointer;
+        }
+
+        .yellow {
+            width: 13px;
+            height: 13px;
+            background-color: #ffb700;
+            border-radius: 100px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .green {
+            width: 13px;
+            height: 13px;
+            background-color: green;
+            border-radius: 100px;
+            cursor: pointer;
+        }
+
+        .round-color {
+            display: flex;
+            justify-content: flex-start;
+            gap: 5px;
+            align-items: center;
+            position: relative;
+            top: 17px;
+            right: 85px;
+        }
+
+        .cross {
+            position: relative;
+            bottom: 2px;
+            left: 3.5px;
+            font-size: 13px;
+            display: none;
+        }
+
+        .circle:hover .close {
+            display: block;
+        }
+
+        .minus {
+            position: relative;
+            bottom: 5px;
+            left: 0.5px;
+            font-size: 20px;
+            display: none;
+        }
+
+        .plus {
+            position: relative;
+            bottom: 3px;
+            left: 2px;
+            display: none;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 400;
+            margin-bottom: 0%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Vanilla Javascript Calculater</h1>
+        <div class="calculater">
+            <div class="round-color">
+                <div class="red circle"><span class="cross close">x</span></div>
+                <div class="yellow circle"><span class="minus close">-</span></div>
+                <div class="green circle"><span class="plus close">+</span></div>
+            </div>
+            <input type="text" id="input">
+            <div class="buttons">
+                <div class="first-column flex">
+                    <button class="btn Ac grey">AC</button>
+                    <button class="grey" id="positive-negitive">+/-</button>
+                    <button class="btn grey">%</button>
+                    <button class="btn orange">/</button>
+                </div>
+                <div class="second-column flex">
+                    <button class="btn">7</button>
+                    <button class="btn">8</button>
+                    <button class="btn">9</button>
+                    <button class="btn orange">*</button>
+                </div>
+                <div class="third-column flex">
+                    <button class="btn">4</button>
+                    <button class="btn">5</button>
+                    <button class="btn">6</button>
+                    <button class="btn orange">-</button>
+                </div>
+                <div class="fourth-column flex">
+                    <button class="btn">1</button>
+                    <button class="btn">2</button>
+                    <button class="btn">3</button>
+                    <button class="btn orange">+</button>
+                </div>
+                <div class="fifth-column flex">
+                    <button class="btn btnZero">0</button>
+                    <button class="btn  btndott">.</button>
+                    <button class="btn equal orange">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let btn = document.querySelectorAll(".btn");
+        let display_input = document.querySelector("#input");
+        let plus_minus_btn = document.querySelector("#positive-negitive");
+        let red_close_btn = document.querySelector(".red");
+        let yellow_close_btn = document.querySelector(".yellow");
+        let state = true
+        btn.forEach(element => {
+            element.addEventListener("click", function (e) {
+                if (e.target.innerText == "=") {
+                    display_input.value = eval(display_input.value);
+                } else {
+                    // e.target.innerText;
+                    display_input.value += e.target.innerText;
+                };
+                if (e.target.innerText == "AC") {
+                    display_input.value = "";
+                };
+            });
+        });
+
+        plus_minus_btn.addEventListener("click", function () {
+            if (state) {
+                display_input.value = "-" + display_input.value;
+                state = false;
+            } else {
+                display_input.value = display_input.value.slice(1);
+                state = true;
+            };
+        });
+
+        red_close_btn.addEventListener("click", function () {
+            document.querySelector(".calculater").style.display = "none";
+        });
+
+        yellow_close_btn.addEventListener("click", function () {
+            document.querySelector(".calculater").style.display = "none";
+            setTimeout(() => {
+                document.querySelector(".calculater").style.display = "";
+            }, 5000);
+        });
+    </script>
+</body>
+
+</html>

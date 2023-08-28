@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="Shortcut Icon" href="images/img-1.png" />
+    <title>Quiz App Using HTML CSS and JavaScript</title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            font-family: 'poppins', sans-serif;
+        }
+
+        body {
+            background-color: #007bff;
+        }
+
+        .start-btn,
+        .info-box,
+        .quiz-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        .info-box.activeInfo,
+        .quiz-box.activeQuiz {
+            z-index: 5;
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .start-btn button {
+            font-size: 25px;
+            font-weight: 500;
+            background-color: #fff;
+            color: #007bff;
+            padding: 15px 30px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .info-box {
+            width: 540px;
+            border-radius: 5px;
+            background-color: #fff;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+
+        .info-box .info-title {
+            height: 60px;
+            width: 100%;
+            border-bottom: 1px solid #d3d3d3;
+            display: flex;
+            align-items: center;
+            padding: 0px 30px;
+            font-size: 20px;
+            font-family: 600;
+        }
+
+        .info-box .info-list {
+            padding: 15px 35px;
+        }
+
+        .info-box .info-list .info {
+            margin: 5px 0px;
+            font-size: 17px;
+        }
+
+        .info-box .info-list .info span {
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .info-box .buttons {
+            height: 60px;
+            padding: 0px 35px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-top: 1px solid #d3d3d3;
+        }
+
+        .info-box .buttons button {
+            margin: 0px 5px;
+            height: 40px;
+            width: 100px;
+            outline: none;
+            border: 1px solid #007bff;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .info-box .buttons button.quit {
+            color: #007bff;
+        }
+
+        .info-box .buttons button.quit:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .info-box .buttons button.restart {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .info-box .buttons button.restart:hover {
+            background-color: #0263ca;
+        }
+
+        .quiz-box {
+            width: 550px;
+            background-color: #fff;
+            border-radius: 5px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+
+        .quiz-box header {
+            position: relative;
+            z-index: 99;
+            height: 70px;
+            padding: 0 30px;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 5px 5px 0 0;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+        }
+
+        .quiz-box header .title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .quiz-box header .timer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 145px;
+            height: 45px;
+            background-color: #cce5ff;
+            border: 1px solid #b8daff;
+            border-radius: 5px;
+            padding: 0 8px;
+        }
+
+        .quiz-box header .timer .time-text {
+            font-size: 17px;
+            font-weight: 400;
+            user-select: none;
+        }
+
+        .quiz-box header .timer .time-sec {
+            font-size: 18px;
+            font-weight: 500;
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 5px;
+            height: 30px;
+            width: 45px;
+            border: 1px solid #343a40;
+            user-select: none;
+        }
+
+        .quiz-box section {
+            padding: 25px 30px 20px 30px;
+            background-color: #fff;
+        }
+
+        .quiz-box section .que-text {
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .quiz-box section .option-list {
+            padding: 20px 0px;
+            display: block;
+        }
+
+        .quiz-box section .option-list .option {
+            background-color: aliceblue;
+            border: 1px solid #84c5fe;
+            border-radius: 5px;
+            font-size: 17px;
+            padding: 8px 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-box section .option-list .option:last-child {
+            margin-bottom: 0%;
+        }
+
+        .quiz-box section .option-list .option:hover {
+            background-color: #cce5ff;
+            color: #004085;
+            border-color: #b8daff;
+        }
+
+        .quiz-box section .option-list .option .icon {
+            height: 26px;
+            width: 26px;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 13px;
+            line-height: 24px;
+            pointer-events: none;
+        }
+
+        .quiz-box section .option-list .option .icon.tick {
+            border-color: #23903c;
+            color: #23903c;
+            background-color: #d4edda;
+        }
+
+        .quiz-box section .option-list .option .icon.cross {
+            background-color: #f8d7da;
+            color: #a42837;
+            border-color: #a42837;
+        }
+
+        .option-list .option.correct {
+            background-color: #d4edda;
+            color: #23903c;
+            border-color: #c3e6cb;
+        }
+
+        .option-list .option.incorrect {
+            background-color: #f8d7da;
+            color: #a42837;
+            border-color: #a42837;
+        }
+
+        .option-list .option.disabled {
+            pointer-events: none;
+        }
+
+        .quiz-box footer {
+            height: 60px;
+            width: 100%;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz-box footer .totle-que span {
+            display: flex;
+            user-select: none;
+        }
+
+        .quiz-box footer .totle-que span p {
+            font-weight: 500;
+            padding: 0 5px;
+        }
+
+        .quiz-box footer .totle-que span p:first-child {
+            padding-left: 0px;
+        }
+
+        .quiz-box footer .next-btn {
+            height: 40px;
+            padding: 0 13px;
+            font-size: 18px;
+            font-weight: 400;
+            border: none;
+            outline: none;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-box footer .next-btn:hover {
+            background-color: #0263ca;
+        }
+
+        .start-btn,
+        .info-box,
+        .quiz-box,
+        .result-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .result-box {
+            background-color: #fff;
+            width: 450px;
+            padding: 25px 30px;
+            border-radius: 5px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+
+        .result-box .icon {
+            font-size: 100px;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .result-box .complete-box {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .result-box .score-text span {
+            display: flex;
+            margin: 10px 0px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .result-box .score-text span p {
+            font-weight: 600;
+            padding: 0px 4px;
+        }
+
+        .result-box .buttons {
+            display: flex;
+            margin: 20px 0px;
+        }
+
+        .result-box .buttons button {
+            margin: 0 10px;
+            height: 45px;
+            padding: 0 20px;
+            border: none;
+            outline: none;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .result-box .buttons .restart {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .result-box .buttons .restart:hover {
+            background-color: #0263ca;
+        }
+
+        .result-box .buttons .quit:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="start-btn"><button>Start Quiz</button></div>
+    <div class="info-box">
+        <div class="info-title">
+            <span>Some Rules of this Quiz.</span>
+        </div>
+        <div class="info-list">
+            <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+            <div class="info">2. Once you select your answer, you can't reselct.</div>
+            <div class="info">3. You can't select any option once time goes off.</div>
+            <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+            <div class="info">5. You'll get points on the basis of your correct answer.</div>
+        </div>
+        <div class="buttons">
+            <button class="quit">Exit Quiz</button>
+            <button class="restart">Continue</button>
+        </div>
+    </div>
+
+    <div class="quiz-box">
+        <header>
+            <div class="title">Awesome Quiz Application.</div>
+            <div class="timer">
+                <div class="time-text">Time left</div>
+                <div class="time-sec">15</div>
+            </div>
+        </header>
+        <section>
+            <div class="que-text">
+                <!-- <span>What does HTML stand for?</span> -->
+            </div>
+            <div class="option-list">
+                <!-- <div class="option">
+                    <span>Hyper Text Preprocessor.</span>
+                    <div class="icon tick"><i class="fa-solid fa-check"></i></div>
+                </div>
+                <div class="option">
+                    <span>Hyper Text Markup Language.</span>
+                    <div class="icon cross"><i class="fa-solid fa-xmark"></i></div>
+                </div>
+                <div class="option">
+                    <span>Hyper Text Multiple Language.</span>
+                </div>
+                <div class="option">
+                    <span>Hyper Text Multi Language.</span>
+                </div> -->
+            </div>
+        </section>
+        <footer>
+            <div class="totle-que">
+                <!-- <span><p>2</p>of<p>5</p>Questions</span> -->
+            </div>
+            <button class="next-btn">Next Que</button>
+        </footer>
+    </div>
+
+    <div class="result-box">
+        <div class="icon">
+            <i class="fa-sharp fa-solid fa-crown"></i>
+        </div>
+        <div class="complete-text">You've complete this Quiz!</div>
+        <div class="score-text">
+            <span>and sorry, You got only <p>2</p> out of <p>5</p></span>
+        </div>
+        <div class="buttons">
+            <button class="restart">Replay Quiz.</button>
+            <button class="quit">Quit Quiz.</button>
+        </div>
+    </div>
+    <script>
+        const start_btn = document.querySelector(".start-btn button");
+        const info_box = document.querySelector(".info-box");
+        const exit_btn = info_box.querySelector(".buttons .quit");
+        const continue_btn = info_box.querySelector(".buttons .restart");
+        const quiz_box = document.querySelector(".quiz-box");
+        const option_list = document.querySelector(".option-list");
+        const timerCount = quiz_box.querySelector(".timer .time-sec");
+
+        start_btn.addEventListener("click", function () {
+            info_box.classList.add("activeInfo");
+        });
+
+        exit_btn.addEventListener("click", function () {
+            info_box.classList.remove("activeInfo");
+        });
+
+        continue_btn.addEventListener("click", function () {
+            info_box.classList.remove("activeInfo");
+            quiz_box.classList.add("activeQuiz");
+            showQuestions(0);
+            queCounter(1);
+            startTimer(15);
+        });
+
+        let que_count = 0;
+        let que_numb = 1;
+        let counter;
+        let timeValue = 15;
+        const next_Btn = quiz_box.querySelector(".next-btn");
+        next_Btn.addEventListener("click", () => {
+            if (que_count < questions.length - 1) {
+                que_count++;
+                que_numb++;
+                showQuestions(que_count);
+                queCounter(que_numb);
+                clearInterval(counter);
+                startTimer(timeValue);
+            } else {
+                console.log("Questions completed");
+            };
+        });
+
+        function showQuestions(index) {
+            const que_text = document.querySelector(".que-text");
+            let que_tag = '<span>' + questions[index].numb + ". " + questions[index].question + '</span>';
+            let option_tag = '<div class="option">' + questions[index].options[0] + '<span></span></div>'
+                + '<div class="option">' + questions[index].options[1] + '<span></span></div>'
+                + '<div class="option">' + questions[index].options[2] + '<span></span></div>'
+                + '<div class="option">' + questions[index].options[3] + '<span></span></div>';
+            que_text.innerHTML = que_tag;
+            option_list.innerHTML = option_tag;
+            const option = option_list.querySelectorAll(".option");
+            for (let i = 0; i < option.length; i++) {
+                option[i].setAttribute("onclick", "optionSelected(this)");
+            };
+        };
+
+        let tickIcon = `<div class="icon tick"><i class="fa-solid fa-check"></i></div>`;
+        let crossIcon = `<div class="icon cross"><i class="fa-solid fa-xmark"></i></div>`;
+
+        function queCounter(index) {
+            const bottom_ques_counter = quiz_box.querySelector(".totle-que");
+            let totalQueCountTag = '<span><p>' + index + '</p>of<p>' + questions.length + '</p>Questions</span>';
+            bottom_ques_counter.innerHTML = totalQueCountTag;
+        };
+
+        function optionSelected(answer) {
+            let userans = answer.textContent;
+            let correctAns = questions[que_count].answer;
+            let allOptions = option_list.children.length;
+            if (userans == correctAns) {
+                answer.classList.add("correct");
+                console.log("Answer is correct");
+                answer.insertAdjacentHTML("beforeend", tickIcon);
+            } else {
+                answer.classList.add("incorrect");
+                console.log("Answer is Wrong");
+                answer.insertAdjacentHTML("beforeend", crossIcon);
+
+                for (let i = 0; i < allOptions; i++) {
+                    if (option_list.children[i].textContent == correctAns) {
+                        option_list.children[i].setAttribute("class", "option correct");
+                        option_list.children[i].insertAdjacentHTML("beforeend", tickIcon);
+                    }
+                }
+            };
+            for (let i = 0; i < allOptions; i++) {
+                option_list.children[i].classList.add("disabled");
+            };
+        };
+
+        function startTimer(time) {
+            counter = setInterval(timer, 1000);
+            function timer() {
+                timerCount.textContent = time;
+                time--;
+                if (time < 9) {
+                    let addZero = timerCount.textContent;
+                    timerCount.textContent = "0" + addZero;
+                };
+
+                if (time < 0) {
+                    clearInterval(counter);
+                    timerCount.textContent = "00";
+                };
+            };
+        };
+    </script>
+
+    <script>
+
+        let questions = [
+            {
+                numb: 1,
+                question: "What does HTML stand for?",
+                answer: "Hyper Text Markup Language.",
+                options: [
+                    "Hyper Text Preprocessor.",
+                    "Hyper Text Markup Language.",
+                    "Hyper Text Multiple Language.",
+                    "Hyper Text Multi Language."
+                ],
+            },
+
+            {
+                numb: 2,
+                question: "What does CSS stand for?",
+                answer: "Cascading Style Sheet",
+                options: [
+                    "Common Style Sheet",
+                    "Colorful Style Sheet",
+                    "Computer Style Sheet",
+                    "Cascading Style Sheet"
+                ],
+            },
+
+            {
+                numb: 3,
+                question: "What does PHP stand for?",
+                answer: "Hypertext Preprocessor",
+                options: [
+                    "Hypertext Preprocessor",
+                    "Hypertext Programming",
+                    "Hypertext Preprogramming",
+                    "Hometext Preprocessor"
+                ],
+            },
+
+            {
+                numb: 4,
+                question: "What does SQL stand for?",
+                answer: "Structured Query Language",
+                options: [
+                    "Stylish Question Language",
+                    "Stylesheet Query Language",
+                    "Statement Question Language",
+                    "Structured Query Language"
+                ],
+            },
+
+            {
+                numb: 5,
+                question: "What does XML stand for?",
+                answer: "eXtensible Markup Language",
+                options: [
+                    "eXtensible Markup Language",
+                    "eXecutable Multiple Language",
+                    "eXtra Multi-Program Language",
+                    "eXamine Multiple Language"
+                ],
+            },
+        ];
+    </script>
+</body>
+
+</html>

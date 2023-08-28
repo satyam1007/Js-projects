@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Methods</title>
+</head>
+
+<body>
+    <script>
+        let num = [1, 2, 3, 4, 5, 6, 7, 8];
+        console.log(num);
+        console.log(typeof num); // We can change typeof any Array for example.
+
+        let b = num.toString();
+        console.log(typeof b);
+
+        let c = num.join(" --> ");
+        console.log(c);
+
+        let p = num.pop();
+        console.log(num);
+        console.log("The value of p is ", p);
+
+        let pu = num.push("push");
+        console.log(num, pu);
+
+        let r = num.shift();
+        console.log(r, num);
+
+        let u = num.unshift("unshift");
+        console.log(u, num); // it return new array length.
+
+        let num_more = [12, 13, 14, 15, 16, 17, 18, 19, 20];
+        console.log(num_more);
+        delete num_more[0];
+        console.log(num_more);
+
+        let arr_1 = [1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 10];
+        let arr_2 = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+        let NewArray = arr_1.concat(arr_2);
+        let NewArray_2 = [...arr_1, ...arr_2]; // this method is called spread operator
+        console.log(NewArray);
+        console.log(NewArray_2);
+
+
+        let srth = [2, 5, 6, 3, 2, 5, 6, 7, 8, 7, 8, 9, 10, 9];
+        srth.sort(); // this method id used to alphabetically sort.
+        srth.sort();
+        console.log(srth);
+
+
+        let compare = (a, b) => {
+            // return a - b
+            return b - a
+        };
+        let dessending = [12, 48, 29, 292, 28, 23, 92, 3, 42, 1];
+        dessending.sort(compare);
+        console.log(dessending);
+
+        let fruits = ["Banana", "Orange", "Apple", "Mango"];
+        fruits.splice(0, 1);
+        console.log(fruits);
+
+        let fruits_more = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+        let citrus = fruits_more.slice(1);
+        console.log(citrus);
+
+        let fruits_even_more = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+        let citrus_more = fruits_even_more.slice(1,3);
+        console.log(citrus_more);
+    </script>
+</body>
+
+</html>

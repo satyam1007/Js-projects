@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8 - Practice Set</title>
+    <style>
+        .bulb {
+            width: 300px;
+            height: 300px;
+        }
+
+        .bulb {
+            background-color: #ffff00;
+        }
+
+        .bulbcontainer {
+            width: 300px;
+            height: 300px;
+            border-radius: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Q-1 -->
+    <button class="btn" onclick="alert('please give me one plate hot-dog')">hot-dog</button>
+    <button class="btn" onclick="alert('please give me one plate burger')">burger</button>
+    <button class="btn" onclick="alert('please give me one plate chowmein')">chowmein</button>
+    <button class="btn" onclick="alert('please give me one plate vada-paw')">vada-paw</button>
+    <button class="btn" onclick="alert('please give me one plate pani-puri')">pani-puri</button>
+    <!-- Q-2 -->
+    <button id="google">Google</button>
+    <button id="fb">facebook</button>
+    <button id="twitter">twitter</button>
+
+    <!-- Q-4 -->
+    <div id="bulb" class="bulbcontainer bulb"></div>
+    <script>
+        // Q-3
+
+        let btn = document.getElementById("google").addEventListener("click", function () {
+            window.location = "https://www.google.com";
+            win.focus();
+        });
+
+        setInterval(async function () {
+            document.querySelector("#bulb").classList.toggle("bulb");
+        }, 200);
+    </script>
+</body>
+
+</html>

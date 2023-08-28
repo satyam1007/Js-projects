@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tel me a joke</title>
+    <style>
+        html,
+        body {
+            background-color: cyan;
+            font-family: "Raleway", sans-serif;
+            text-align: center;
+            margin: 125px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 20px;
+            border: 2px solid black;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">Click me to show you funny joke</button>
+    <script>
+        let btn = document.getElementById("btn");
+        let paragraph = 0;
+
+        let joke = ["A pun is a play on words so this type of joke plays with different meanings of a word or is based on words which sound the same – but which have a different meaning.Here’s an example of words that sound the same.I went to the zoo the other day.There was only a dog in it – it was a shihtzu.Explanation: A shihtzu is a type of dog.But when you say shihtzu it sounds like sh * t zoo meaning a terrible zoo.By the way this joke is also an example of a one - liner – a joke in just one sentence.Here’s another example of different meanings of a word.Two aerials get married.The ceremony was rubbish – but the reception was brilliant.Explanation: Reception can mean the party after the wedding OR the signal on your TV or phone", "A lot of jokes start with this sentence. Then the joke continues with a little story about a man in a bar. But, a bar is also a hard piece of wood or metal, so you also get jokes like this: Example 1 A man walks into a bar. Ouch! Explanation: Ouch is what we say when we hurt ourselves. Example 2 A dyslexic man walks into a bra. Explanation: If you are dyslexic, you have difficulty with letters. Instead of b-a-r, the word is b-r-a (which means women’sunderwear.", "Men often tell these jokes, and they’re also considered a little sexist and old-fashioned. Here’s an example: My mother-in-law fell down a wishing well. I was amazed – I never knew they worked. Explanation: A wishing well is a well place where you can lower a bucket to bring up water where you can make a wish – and it happens.", "hese are based on shared cultural knowledge, which makes them hard to understand.Here’s an example: Doctor, I can’t stop singing The Green Green Grass of Home.He says That sounds like Tom Jones syndrome.Is it common ?” I asked.It’s not unusual” he replied.Explanation: It’s not unusual is a famous song by Tom Jones.", "These always start How many type of person does it take to change a lightbulb ? Here’s my all - time favourite: How many members of the Socialist Workers’ Party does it take to change a lightbulb ? About a million.One out, all out.Explanation: One out, all out was a slogan used by the Socialist Workers’ Party to get everyone to come out on strike / take industrial action.When we say a lightbulb is out, we mean it no longer works."];
+        btn.addEventListener("click", function () {
+            btn.innerText = joke[paragraph];
+            paragraph++
+            if (paragraph === joke.length){
+                btn.innerText = "Click me to show you funny joke";
+                paragraph = 0;
+            };
+        });
+    </script>
+</body>
+
+</html>

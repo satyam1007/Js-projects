@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Console Object</title>
+</head>
+<body>
+    <script>
+        console.log("Hi there");
+        console.log(console);
+        console.error("This is an error");
+        console.assert(5>55);
+        console.clear();
+
+        let obj = {
+            Name: "Satyam Mishra",
+            Age: 15,
+            Class: 8,
+            friend: "Aman Mishra, Shivam Mishra"
+        };
+        console.table(obj);
+
+
+        console.time("forloop");
+        for (let i = 0; i < 50; i++) {
+            console.log(i);
+        };
+        console.timeEnd("forloop");
+    </script>
+</body>
+</html>

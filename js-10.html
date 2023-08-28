@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ch-3 Practice set</title>
+</head>
+
+<body>
+    <script>
+        // Q-1
+        let marks = {
+            Rohit: 50,
+            Shubham: 80,
+            Sumit: 50,
+            Shiva: 50,
+            Ayush: 75,
+        };
+
+        for (let i = 0; i < Object.keys(marks).length; i++) {
+            console.log("The marks of " + Object.keys(marks)[i] + " are " + marks[Object.keys(marks)[i]]);
+        };
+        console.log("After write code for in loop");
+        for (let key in marks) {
+            console.log("The marks of " + key + " are " + marks[key]);
+        };
+        // Q-2
+
+        // let cn = 4;
+        // let i;
+        // while (i != cn) {
+        //     i = prompt("Enter A number between 5 ");
+        // };
+        // console.log("You have been won this game");
+
+        function addnum(a,b,c,d) {
+            return (a + b + c + d)/4;
+        };
+        console.log(addnum(4,5,6,7));
+    </script>
+</body>
+
+</html>

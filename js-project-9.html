@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="Shortcut Icon" href="images/img-1.png" />
+    <title>Accordion using html css and javascript</title>
+    <style>
+        html,
+        body {
+            margin: 0%;
+            padding: 0%;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        button {
+            width: 70%;
+            height: 40px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            border: none;
+            border-bottom: none;
+            border-radius: 3px;
+            box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+            align-items: center;
+            margin: auto;
+            transition: 0.4s ease-in-out;
+        }
+
+        .para {
+            margin: auto;
+            width: 70%;
+            max-height: 0;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            text-align: justify;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        .bottom {
+            border-bottom: 1px solid #000;
+        }
+
+        .active,
+        .Accordion:hover {
+            background-color: #e7e5e4;
+        }
+
+        .fa-solid {
+            transition: 0.4s ease-out;
+        }
+
+        .active .fa-solid {
+            transform: rotate(180deg);
+            transition: 0.4s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button class="Accordion">Application Development <i class="fa-solid fa-chevron-up"></i></button>
+        <div class="para"></i>
+            <p>With over 10 years of experience in building world-class B2B & B2C
+                applications. Our
+                clients
+                range from startups to enterprises and we have worked with a variety of industry verticals
+                including healthcare, adtech, eLearning, data analysis, Fintech & eCommerce.
+
+                We offer end-to-end custom web development services including ground-up bespoke web
+                development,
+                migration, update, & ongoing maintenance services.
+            </p>
+        </div>
+        <button class="Accordion">Website Development <i class="fa-solid fa-chevron-up"></i></button>
+        <div class="para">
+            <p>Having more than 10 years of experience in web development, we serve our
+                clients to
+                deliver
+                complex web applications as well as custom or simple landing pages. Our web development
+                strategies include HTML, CSS, Javascript, Vue.JS, React.JS, WordPress, October CMS, PHP, and
+                various other programming languages & frameworks to make your web development project a robust
+                solution. Excel your web solutions with us!</p>
+        </div>
+        <button class="Accordion">Mobile App Development <i class="fa-solid fa-chevron-up"></i></button>
+        <div class="para">
+            <p>Whether you require native or cross platform apps, our mobile application
+                development services
+                are designed to deliver cutting-edge, customized mobility solutions for your unique business
+                requirements. Our highly experienced developers have built a range of secured and scalable apps
+                for clients in diverse industry verticals. So, you can avail our mobile app development services
+                to leverage the best of it.</p>
+        </div>
+        <button class="Accordion">Product Design <i class="fa-solid fa-chevron-up"></i></button>
+        <div class="para">
+            <p>Understanding how important is product design, we work with top-class UX/UI
+                professionals to
+                produce unique user experiences and user interfaces for new product ideas. Some of our
+                design work is noted for its craftsmanship and precision and made it through to win several
+                awards.</p>
+        </div>
+        <button class="Accordion">Devops <i class="fa-solid fa-chevron-up"></i></button>
+        <div class="para bottom">
+            <p>Every product requires support and maintenance regardless of the industry and type of
+                product it
+                is. We provide flexible support and maintenance plans, whether it's a small landing page or a
+                complex web/ mobile solution - we will provide a tailored package just for you. Investing
+                in the right IT support and maintenance plan can save up to 30% in costs. Unreliable,
+                out-of-date code and 3rd party integrations may cause unnecessary down-time or impact your
+                product usability by end customers.</p>
+        </div>
+    </div>
+    <script>
+        let Accordion = document.querySelectorAll(".Accordion");
+        for (let i = 0; i < Accordion.length; i++) {
+            Accordion[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                let para = this.nextElementSibling;
+                if (para.style.maxHeight) {
+                    para.style.maxHeight = null;
+                } else {
+                    para.style.maxHeight = para.scrollHeight + "px";
+                };
+            });
+        };
+    </script>
+</body>
+
+</html>

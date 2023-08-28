@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"
+        integrity="sha512-Eezs+g9Lq4TCCq0wae01s9PuNWzHYoCMkE97e2qdkYthpI0pzC3UGB03lgEHn2XM85hDOUF6qgqqszs+iXU4UA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="Shortcut Icon" href="images/img-1.png" />
+    <title>Drag and drop using html css and javascript</title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(30deg, #001039, #00fcfb);
+        }
+
+        .dragbox {
+            width: 100%;
+            max-width: 350px;
+            background-color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .dragbox .listItem {
+            width: 100%;
+            background: linear-gradient(30deg, #001039, #00fcfb);
+            display: flex;
+            justify-content: space-between;
+            border-radius: 8px;
+            margin: 5px 0px;
+            cursor: pointer;
+            padding: 20px;
+            color: #ffffff;
+        }
+
+        .dragbox .listItem .text {
+            text-transform: capitalize;
+            letter-spacing: 1px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .dragbox .listItem i {
+            font-size: 25px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="dragbox">
+        <div class="listItem">
+            <div class="text">This is first item.</div>
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="listItem">
+            <div class="text">This is second item.</div>
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="listItem">
+            <div class="text">This is third item.</div>
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="listItem">
+            <div class="text">This is fourth item.</div>
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+    <script>
+        let dragBox = document.querySelector(".dragbox");
+        new Sortable(dragBox, {
+            animation: 400
+        });
+    </script>
+</body>
+
+</html>

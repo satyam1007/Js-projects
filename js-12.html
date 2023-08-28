@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Method</title>
+</head>
+
+<body>
+    <script>
+        let name = "Satyam";
+        console.log(name.length);
+        console.log(name.toUpperCase());
+        console.log(name.toLowerCase());
+        console.log(name.slice(0, 5));
+        console.log(name.replace("Satyam", "Shivam"));
+
+        let friend = "Aman Shivam";
+        console.log(name.concat(" is a friend of ", friend, ", and they are best friend."));
+
+        let friend_2 = "     Shivam     ";
+        console.log(friend_2.length);
+        console.log(friend_2.trim().length); // trim is used for remove spaces in letter. 
+
+        let fr = "Shivika";
+        // console.log(fr[0]);
+        // console.log(fr[1]);
+        // console.log(fr[2]);
+        // console.log(fr[3]); // this method is wrong to get indexs of letter.
+        // console.log(fr[4]);
+        // console.log(fr[5]);
+        // console.log(fr[6]);
+        for (let i = 0; i < fr.length; i++) {  // this method is right to get indexs of letter using for loop.
+            console.log(fr[i]);
+        };
+
+        // by w3Schools.com
+
+        let text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        console.log(text.length);
+
+        let str = "Apple, Mango, Kiwi";
+        console.log(str.slice(0, 5));
+        console.log(str.slice(7));
+        console.log(str.slice(-12));
+        console.log(str.slice(-12, -6));
+        console.log(str.substring(0, 5));  // substring() is similar to slice().
+        console.log(str.substr(0, 5));
+
+        let comp = "Please visit Microsoft!";
+        console.log(comp.replace("Microsoft", "Jeoga.com"));
+
+        let String = "I love cats. Cats are very easy to love. Cats are very popular.";
+        String = String.replaceAll("Cats", "Dogs");
+        String = String.replaceAll("cats", "dogs");
+        console.log(String);
+
+        let text1 = "Hello World!";
+        let text2 = text1.toUpperCase();
+        text1.toLowerCase();  // text2 is text1 converted to lower
+        console.log(text2);
+
+        let rep_1 = "Hello";
+        let rep_2 = "World";
+        let rep_3 = rep_1.concat(" ", rep_2);
+        console.log(rep_3);
+    </script>
+</body>
+
+</html>

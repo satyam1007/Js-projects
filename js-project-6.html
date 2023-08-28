@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Shortcut Icon" href="images/img-1.png" />
+    <title>Price calculator using html css and javascript</title>
+    <style>
+        html,
+        body {
+            font-family: "Raleway", sans-serif;
+            background-color: #000;
+        }
+
+        .first-column {
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .first-column .first {
+            width: 270px;
+            height: 45px;
+            text-align: center;
+            padding-top: 20px;
+            border: 1px solid black;
+            background-color: #685a72;
+            color: #fff;
+        }
+
+        .first-column .calculate {
+            width: 330px;
+            height: 45px;
+            padding-top: 20px;
+            text-align: center;
+            border: 1px solid black;
+            background-color: #3f546a;
+            color: #fff;
+        }
+
+        .first-column .calculate input {
+            width: 90px;
+            height: 25px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .first-column .first div {
+            width: 270px;
+            height: 35px;
+            border: 1px solid #acbdce;
+            background-color: #f8fbff;
+            border-top: none;
+            position: relative;
+            top: 28px;
+            text-align: right;
+        }
+
+        .first-column .first div span {
+            color: #000;
+            font-weight: 100;
+            position: relative;
+            top: 10px;
+            margin-right: 10px;
+        }
+
+        .first-column .calculate div {
+            width: 330px;
+            height: 35px;
+            border: 1px solid #acbdce;
+            background-color: #e5effb;
+            border-top: none;
+            border-left: none;
+            position: relative;
+            top: 19px;
+            text-align: right;
+        }
+
+        .first-column .calculate div span {
+            color: #000;
+            font-weight: 100;
+            position: relative;
+            top: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="first-column">
+        <div class="first">
+            Tokens per execution
+            <div><span>10</span></div>
+            <div><span>20</span></div>
+            <div><span>50</span></div>
+            <div><span>100</span></div>
+            <div><span>200</span></div>
+            <div><span>500</span></div>
+            <div><span>1000</span></div>
+            <div><span>2000</span></div>
+            <div><span>4000</span></div>
+        </div>
+        <div class="first">
+            Words per execution
+            <div><span>8</span></div>
+            <div><span>15</span></div>
+            <div><span>38</span></div>
+            <div><span>75</span></div>
+            <div><span>150</span></div>
+            <div><span>375</span></div>
+            <div><span>750</span></div>
+            <div><span>1500</span></div>
+            <div><span>3000</span></div>
+        </div>
+        <div class="first">
+            Price for 1 execution
+            <div><span>$0.00002</span></div>
+            <div><span>$0.00004</span></div>
+            <div><span>$0.00010</span></div>
+            <div><span>$0.00020</span></div>
+            <div><span>$0.00040</span></div>
+            <div><span>$0.00100</span></div>
+            <div><span>$0.00200</span></div>
+            <div><span>$0.00400</span></div>
+            <div><span>$0.00800</span></div>
+        </div>
+        <div class="calculate">
+            Price for <input type="number" class="input"> executions
+            <div><span class="change" data-price="0.02">$ 0.02</span></div>
+            <div><span class="change" data-price="0.04">$ 0.04</span></div>
+            <div><span class="change" data-price="0.10">$ 0.10</span></div>
+            <div><span class="change" data-price="0.20">$ 0.20</span></div>
+            <div><span class="change" data-price="0.40">$ 0.40</span></div>
+            <div><span class="change" data-price="1.00">$ 1.00</span></div>
+            <div><span class="change" data-price="2.00">$ 2.00</span></div>
+            <div><span class="change" data-price="4.00">$ 4.00</span></div>
+            <div><span class="change" data-price="8.00">$ 8.00</span></div>
+        </div>
+    </div>
+    <script>
+        let input = document.querySelector(".input");
+        let changing = document.querySelectorAll(".change");
+        input.addEventListener("input", function () {
+            for (let i = 0; i < changing.length; i++) {
+                let total = changing[i].getAttribute("data-price");
+
+                let check = Number.parseInt(input.value) * Number.parseFloat(total);
+
+                changing[i].innerText = "$ " + check;
+            };
+
+            if (input.value == "") {
+                changing.forEach(element => {
+                    element.innerHTML = "$ " + element.getAttribute("data-price");
+                });
+            };
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>innerHTML, outerHTML and other properties</title>
+</head>
+<body>
+    <span id="first">Hey i am span</span>
+    <script>
+    console.log(document.getElementsByTagName("span")[0]);
+    console.dir(document.getElementsByTagName("span")[0]);
+    console.dir(document.body.firstChild.nodeName);
+    console.dir(document.body.firstElementChild.nodeName);
+    let sp = document.getElementById("first");
+    sp.innerHTML = "<h1>Hey i am a h1 tag</h1>";
+    console.log(first.innerText);
+    console.log(first.outerHTML);
+    </script>
+</body>
+</html>

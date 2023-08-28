@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions</title>
+</head>
+
+<body>
+    <script>
+
+        function onePlusAvg(x, y) {
+            console.log("Done");
+            return Math.round(1 + (x + y) / 2);
+        };
+
+        let a = 1;
+        let b = 2;
+        let c = 3;
+
+        // console.log("The sum of a and b is", 1 + (a + b) / 2);
+        // console.log("The sum of b and c is", 1 + (b + c) / 2);
+        // console.log("The sum of a and c is", 1 + (a + c) / 2);
+
+        console.log("The sum of a and b is", onePlusAvg(a, b));
+        console.log("The sum of b and c is", onePlusAvg(b, c));
+        console.log("The sum of a and c is", onePlusAvg(a, c));
+
+        // Arrow function
+
+        const sum = (p, q) => {
+            return (p + q);
+        };
+        console.log(sum(12, 20));
+
+        const add = () => {
+            console.log("Hey how are you, I am fine yaar");
+        };
+        add();
+    </script>
+</body>
+
+</html>

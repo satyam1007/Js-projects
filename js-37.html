@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setInterval and setTimeout</title>
+</head>
+
+<body>
+    <script>
+        // let a = setTimeout(() => {
+        //     console.log(new Date());
+        // }, 2000);
+        // clearTimeout(a);
+
+        // const sum = (a, b) => {
+        //     console.log("yes i am runing");
+        //     a+b
+        // };
+
+        // setTimeout(sum, 2000, 1,2);
+
+        // const add = (a,b) => {
+        //     console.log("this is added");
+        //     a+b;
+        // };
+
+        // setInterval(add, 1000, 1,2);
+
+        let inter = setInterval(() => {
+            console.log("Hello World");
+        }, 1000);
+        clearInterval(inter);
+    </script>
+</body>
+
+</html>

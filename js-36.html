@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changing HTML Classes</title>
+    <style>
+        .yellow{
+            background-color: #ffff00;
+            color: #000000;
+            padding: 10px;
+            font-size: 20px;
+        }
+        .orange{
+            background-color: #ffa500;
+            color: #000000;
+            padding: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="first" class="orange text-dark">
+        <span>Hey i am span</span>
+    </div>
+    <script>
+        let a = document.getElementById("first");
+        first.classList.remove("orange");
+        first.classList.add("orange");
+        first.classList.toggle("orange");
+        first.classList.toggle("orange");
+    </script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="Shortcut Icon" href="images/img-1.png" />
+    <title>Vertual Keyboard Using Vanilla javascript</title>
+    <style>
+        button {
+            border: none;
+            border: 1px solid black;
+            transition: 0.2s ease;
+            background-color: white;
+            box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+        }
+
+        /* button:hover {
+            background-color: #000;
+            color: #fff;
+        } */
+
+        #keyboard .keys {
+            width: 70px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #row-1 {
+            display: flex;
+            justify-content: center;
+        }
+
+        #row-1 #back-key {
+            width: 125px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #row-2 {
+            display: flex;
+            justify-content: center;
+        }
+
+        #row-2 #tab-key {
+            width: 100px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #row-2 #slash-key {
+            width: 95px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #row-3 {
+            display: flex;
+            justify-content: center;
+        }
+
+        #row-3 #caps-key {
+            width: 115px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #enter-key {
+            width: 150px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #row-4 {
+            display: flex;
+            justify-content: center;
+        }
+
+        #row-4 .shift-key {
+            width: 167px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #row-5 {
+            display: flex;
+            justify-content: center;
+        }
+
+        #row-5 #control-key {
+            width: 117px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            border-bottom-left-radius: 10px;
+        }
+
+        #row-5 #control-key-2 {
+            width: 117px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            border-bottom-right-radius: 10px;
+        }
+
+        #row-5 #win-key {
+            width: 100px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #row-5 #alt-key {
+            width: 100px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #row-5 #space-key {
+            width: 400px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #keyboard {
+            margin-top: 150px;
+        }
+
+        input {
+            display: flex;
+            justify-content: center;
+            width: 80.4%;
+            height: 40px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            font-size: 20px;
+            pointer-events: none;
+            border: none;
+            border-radius: 5px;
+            box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+        }
+
+        .black-color {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgb(109, 107, 107);
+            border-radius: 100px;
+            background-color: black;
+            cursor: pointer;
+        }
+
+        .blue-color {
+            width: 20px;
+            height: 20px;
+            border: 3px solid black;
+            border-radius: 100px;
+            background-color: blue;
+            cursor: pointer;
+        }
+
+        .red-color {
+            width: 20px;
+            height: 20px;
+            border: 3px solid black;
+            border-radius: 100px;
+            background-color: red;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .green-color {
+            width: 20px;
+            height: 20px;
+            border: 3px solid black;
+            border-radius: 100px;
+            background-color: green;
+            cursor: pointer;
+        }
+
+        .white-color {
+            width: 20px;
+            height: 20px;
+            border: 3px solid black;
+            border-radius: 100px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        #colors {
+            display: flex;
+            justify-content: end;
+            gap: 3px;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: "Raleway", sans-serif;
+            font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+    <did id="parent">
+        <div id="colors">
+            <div class="btn black-color" id="color"></div>
+            <div class="btn white-color" id="color"></div>
+            <div class="btn blue-color" id="color"></div>
+            <div class="btn red-color" id="color"></div>
+            <div class="btn green-color" id="color"></div>
+        </div>
+        <div id="keyboard">
+            <h1 id="demo"></h1>
+            <input type="text" id="input" placeholder="Write Here">
+            <div id="row-1">
+                <button class="keys">~</button>
+                <button class="keys">1</button>
+                <button class="keys">2</button>
+                <button class="keys">3</button>
+                <button class="keys">4</button>
+                <button class="keys">5</button>
+                <button class="keys">6</button>
+                <button class="keys">7</button>
+                <button class="keys">8</button>
+                <button class="keys">9</button>
+                <button class="keys">0</button>
+                <button class="keys">-</button>
+                <button class="keys">=</button>
+                <button id="back-key">Delete</button>
+            </div>
+            <div id="row-2">
+                <button id="tab-key">Tab</button>
+                <button class="keys">Q</button>
+                <button class="keys">W</button>
+                <button class="keys">E</button>
+                <button class="keys">R</button>
+                <button class="keys">T</button>
+                <button class="keys">Y</button>
+                <button class="keys">U</button>
+                <button class="keys">I</button>
+                <button class="keys">O</button>
+                <button class="keys">P</button>
+                <button class="keys">[</button>
+                <button class="keys">]</button>
+                <button id="slash-key">\</button>
+            </div>
+            <div id="row-3">
+                <button id="caps-key">Caps</button>
+                <button class="keys">A</button>
+                <button class="keys">S</button>
+                <button class="keys">D</button>
+                <button class="keys">F</button>
+                <button class="keys">G</button>
+                <button class="keys">H</button>
+                <button class="keys">J</button>
+                <button class="keys">K</button>
+                <button class="keys">L</button>
+                <button class="keys">;</button>
+                <button class="keys">'</button>
+                <button id="enter-key">Enter</button>
+            </div>
+            <div id="row-4">
+                <button class="shift-key">Shift</button>
+                <button class="keys">Z</button>
+                <button class="keys">X</button>
+                <button class="keys">C</button>
+                <button class="keys">V</button>
+                <button class="keys">B</button>
+                <button class="keys">N</button>
+                <button class="keys">M</button>
+                <button class="keys"><i class="fa-solid fa-less-than"></i></button>
+                <button class="keys"><i class="fa-solid fa-greater-than"></i></button>
+                <button class="keys">?</button>
+                <button class="shift-key">Shift</button>
+            </div>
+            <div id="row-5">
+                <button id="control-key">Ctrl</button>
+                <button id="win-key" class="keys">Win</button>
+                <button id="alt-key" class="keys">Alt</button>
+                <button id="space-key">Space</button>
+                <button id="alt-key" class="keys">Alt</button>
+                <button id="win-key" class="keys">Win</button>
+                <button id="control-key-2" class="keys">Ctrl</button>
+            </div>
+        </div>
+    </did>
+    <script>
+        let colors = document.getElementsByClassName("btn");
+        for (let i = 0; i < colors.length; i++) {
+            colors[i].addEventListener("click", function () {
+                let buttonStyle = getComputedStyle(this);
+                let buttonBgColor = buttonStyle["backgroundColor"];
+                document.body.style.backgroundColor = buttonBgColor;
+            });
+        };
+
+        let btn = document.querySelectorAll(".keys");
+        let input = document.querySelector("#input");
+        let back = document.querySelector("#back-key");
+        let caps_key = document.querySelector("#caps-key");
+        let space_key = document.querySelector("#space-key");
+        let string = " ";
+
+        btn.forEach(element => {
+            element.addEventListener("click", function (e) {
+                let value = e.target.innerText;
+                if (capsState) {
+                    value = value.toLowerCase();
+                } else {
+                    value = value.toUpperCase();
+                };
+                input.value += value;
+            });
+        });
+
+        let input_2 = document.querySelector("#input");
+        back.addEventListener("click", function () {
+            let input = document.querySelector("#input").value
+            input_2.value = input.slice(0, -1);
+        });
+
+        let capsState = true;
+
+        caps_key.addEventListener("click", function () {
+            if (capsState) {
+                caps_key.style.background = "green";
+                caps_key.style.color = "white";
+                caps_key.innerText = "Caps On";
+                capsState = false
+            } else {
+                caps_key.style.background = "white";
+                caps_key.style.color = "black";
+                caps_key.innerText = "Caps";
+                capsState = true
+            };
+        });
+
+        let sp = document.querySelector("#space-key");
+        sp.addEventListener("click", function () {
+            input.value += " ";
+            // input.value = input.value + " ";
+        });
+
+        let enter = document.querySelector("#enter-key");
+        enter.addEventListener("click", function () {
+            input.value = " ";
+            document.getElementById("demo").innerText = "Your content is processed";
+            setTimeout((content) => {
+                document.getElementById("demo").innerText = " ";
+            }, 2000);
+        });
+
+        let tab = document.querySelector("#tab-key");
+        tab.addEventListener("click", function () {
+            input.value += "    ";
+        });
+    </script>
+</body>
+
+</html>

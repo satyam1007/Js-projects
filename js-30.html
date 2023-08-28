@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2: Solution & Shoutouts Snake Water And Gun</title>
+    <style>
+        html, body{
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let user = prompt("Enter s, w or g ");
+        let cpu_1 = Math.floor(Math.random() * 3);
+        let cpu = ["s", "w", "g"][cpu_1];
+
+        const match = (cpu, user) => {
+            if (cpu == user) {
+                return "Nobody. Match is tied";
+            }
+            else if (cpu == "s" && user == "w") {
+                return "cpu";
+            }
+            else if (cpu == "s" && user == "g") {
+                return "user";
+            }
+            else if (cpu == "g" && user == "w") {
+                return "user";
+            }
+            else if (cpu == "g" && user == "s") {
+                return "cpu";
+            }
+            else if (cpu == "w" && user == "s") {
+                return "cpu";
+            }
+            else if (cpu == "w" && user == "g") {
+                return "cpu";
+            };
+        };
+
+        let result = match(cpu, user);
+        document.write(`CPU:${cpu}<br> User:${user} <br> The winner is: ${result}`);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 3: Digital Clock Using Javascript</title>
+    <style>
+        html,
+        body {
+            background-color: #0099ff;
+            color: white;
+        }
+
+        .container .flex {
+            text-align: center;
+            margin-top: 25%;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 10px;
+            padding: 10px;
+            border: 5px solid #f39c07;
+            font-family: "Raleway", sans-serif;
+            box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+        }
+
+        .container .flex #time {
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="flex">
+            <div id="time"></div>
+        </div>
+    </div>
+    <script>
+        function DisplayTime() {
+            let date = new Date();
+            let hour = date.getHours();
+            let minut = date.getMinutes();
+            let second = date.getSeconds();
+            let amOrpm = "Am";
+            if (hour >= 12) {
+                amOrpm = "PM";
+            };
+
+            if (hour < 12) {
+                amOrpm = "AM";
+            };
+
+            if (minut < 10) {
+                minut = "0" + minut
+            };
+
+            if (second < 10) {
+                second = "0" + second;
+            };
+            
+            document.getElementById("time").innerHTML = hour + " : " + minut + " : " + second + " " + amOrpm;
+        };
+
+        setInterval(DisplayTime, 1000);
+    </script>
+</body>
+
+</html>

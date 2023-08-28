@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+    <link rel="Shortcut Icon" href="images/img-1.png" />
+    <title>ToDo List using html css and javascript</title>
+
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+            font-family: "Raleway", sans-serif;
+        }
+
+        body {
+            background-color: #3c87ff;
+            overflow: hidden;
+        }
+
+        .wrapper {
+            max-width: 405px;
+            margin: 135px auto;
+            background-color: #fff;
+            border-radius: 7px;
+            padding: 28px 0px;
+        }
+
+        .wrapper .task-input {
+            height: 52px;
+            padding: 0 25px;
+            position: relative;
+        }
+
+        .task-input i {
+            position: absolute;
+            top: 50%;
+            transform: translate(17px, -50%);
+        }
+
+        .task-input input {
+            height: 100%;
+            width: 100%;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 2px solid #c7c7c7;
+            padding: 0px 20px 0px 53px;
+        }
+
+        .task-input input::placeholder {
+            color: #bfbfbf;
+        }
+
+        .controls,
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .controls {
+            padding: 18px 25px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .filters span {
+            margin: 0 8px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .filters span.active {
+            color: #3c87ff;
+        }
+
+        .filters span:first-child {
+            margin-left: 0;
+        }
+
+        .controls .clear-btn {
+            outline: none;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            padding: 7px 13px;
+            background-color: #3c87ff;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        .task-box {
+            margin: 20px 25px;
+        }
+
+        .task-box .task {
+            list-style-type: none;
+            font-size: 17px;
+            margin-bottom: 18px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .task-box .task:last-child {
+            margin-bottom: 0;
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .task label {
+            display: flex;
+        }
+
+        .task label .checked {
+            text-decoration: line-through;
+        }
+
+        .task label input {
+            margin-left: 6px;
+            margin-right: 12px;
+        }
+
+        .task .settings {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .task .settings .remove {
+            display: none;
+        }
+
+        .settings .task-menu {
+            position: absolute;
+            background-color: #fff;
+            right: -5px;
+            bottom: -65px;
+            z-index: 2;
+            transform: scale(0);
+            transform-origin: top right;
+            transition: transform 0.2s ease;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            border-radius: 5px;
+        }
+
+        .settings .task-menu.show {
+            transform: scale(1);
+        }
+
+        .task-menu li {
+            height: 25px;
+            font-size: 16px;
+            padding: 17px 15px;
+            margin-bottom: 2px;
+            justify-content: flex-start;
+        }
+
+        .task-menu li:hover {
+            background-color: #e6e6e6;
+        }
+
+        .task-menu li:last-child {
+            margin-bottom: 0;
+        }
+
+        .task-menu li i {
+            padding-right: 8px;
+        }
+
+        .arrow-up-down {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="task-input">
+            <i class="fa-solid fa-bars-staggered"></i>
+            <input type="text" name="input" id="input" placeholder="Add a new task...">
+        </div>
+        <div class="controls">
+            <div class="filters">
+                <span id="All" class="active">All</span>
+                <span id="pending">Pending</span>
+                <span id="completed">Completed</span>
+            </div>
+            <button class="clear-btn">Clear All</button>
+        </div>
+        <ul class="task-box"></ul>
+    </div>
+</body>
+
+<script>
+    const taskInput = document.querySelector(".task-input input"), taskBox = document.querySelector(".task-box");
+    clearAll = document.querySelector(".clear-btn");
+    let arrowDown = document.querySelectorAll(".fa-arrow-down");
+    let todos = JSON.parse(localStorage.getItem("todo-list"));
+
+    taskInput.addEventListener("keyup", e => {
+        let userTask = taskInput.value.trim();
+        if (e.key == "Enter" && userTask) {
+            if (!todos) {
+                todos = [];
+            };
+
+            taskInput.value = "";
+            let taskInfo = { name: userTask, status: "pending" };
+            todos.push(taskInfo);
+            localStorage.setItem("todo-list", JSON.stringify(todos));
+            showTodo();
+        };
+    });
+
+    function showTodo() {
+        let li = ""
+        if (todos) {
+            todos.forEach((todo, id) => {
+                let isCompleted = todo.status == "completed" ? "checked" : "";
+                li += `<li class="task">
+            <label for="${id}">
+                <input onclick="updatedStatus(this)" type="checkbox" id="${id}" ${isCompleted}>
+                <p class="${isCompleted}" id="drag">${todo.name}</p>
+            </label>
+            <div class="settings">
+                <i onclick="showMenu(this)" class="fa-solid fa-ellipsis"></i>
+                <ul class="task-menu">
+                    <li onclick="editTask(${id}, '${todo.name}')" id="improve"><i class="fa-regular fa-pen-to-square"></i>Edit</li>
+                    <div class="arrow-up-down"><li><i class="fa-solid fa-arrow-up"  onclick="drag(${id})"></i></li><li><i class="fa-solid fa-arrow-down"></i></li></div>
+                    <li onclick="deleteTask(${id})" id="trash"><i class="fa-solid fa-trash"></i>Delete</li>
+                </ul>
+            </div>
+        </li>`
+            });
+        };
+
+        taskBox.innerHTML = li || "<span>You don't have any tasks...</span>";
+    };
+    showTodo();
+
+    function updatedStatus(selectedTask) {
+        let taskName = selectedTask.parentElement.lastElementChild;
+        if (selectedTask.checked) {
+            taskName.classList.add("checked");
+            todos[selectedTask.id].status = "completed"
+        } else {
+            taskName.classList.remove("checked");
+            todos[selectedTask.id].status = "pending"
+        };
+        localStorage.setItem("todo-list", JSON.stringify(todos));
+    };
+
+    function showMenu(selectedTask) {
+        let taskMenu = selectedTask.parentElement.lastElementChild;;
+        taskMenu.classList.add("show");
+        document.addEventListener("click", function (e) {
+            if (e.target.tagName != "I" || e.target != selectedTask) {
+                taskMenu.classList.remove("show");
+            };
+        });
+    };
+
+    function deleteTask(deleteId) {
+        todos.splice(deleteId, 1);
+        localStorage.setItem("todo-list", JSON.stringify(todos));
+        showTodo();
+    };
+
+    function editTask(taskId, taskName) {
+        taskInput.value = taskName;
+    };
+
+    clearAll.addEventListener("click", () => {
+        todos.splice(0, todos.length);
+        localStorage.setItem("todo-list", JSON.stringify(todos));
+        showTodo();
+    });
+
+    function drag(id) {
+        let selectedTask = document.querySelectorAll("#drag");
+        todos = [selectedTask[id].innerHTML = selectedTask[id].previousSibling.innerHTML];
+        todos.sort();
+        showTodo();
+    };
+</script>
+
+</html>

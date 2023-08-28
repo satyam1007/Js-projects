@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Shortcut Icon" href="images/img-1.png" />
+    <title>Toggle Hide Paragraph Using HTML, CSS and Javascript</title>
+    <style>
+        #container .btn {
+            border: none;
+            border: 2px solid black;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #container .btn_2 {
+            margin-top: 3px;
+            border: 2px solid black;
+            padding-left: 18.5px;
+            padding-right: 18.5px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <button class="btn">Click me to Show Paragraph</button>
+        <button class="btn_2">This is button to Show you</button>
+    </div>
+    <script>
+        let btn = document.querySelector(".btn");
+        let para = document.querySelector(".btn_2");
+        let i = true;
+
+        btn.addEventListener("click", function () {
+            if(i){
+                para.style.display = "block";
+                btn.innerText = "Click me to Hide Paragarph";
+                i = false;
+            }else{
+                para.style.display = "none";
+                btn.innerText = "Click me to Show Paragarph";
+                i = true
+            };
+        });
+    </script>
+</body>
+
+</html>

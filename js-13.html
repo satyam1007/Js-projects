@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ch-4 Practice set</title>
+</head>
+
+<body>
+    <script>
+        // Q-1
+        let str = "Har\"";
+        console.log(str.length);
+        // Q-2
+        let text = "Hello world";
+        if (text.endsWith, "world") {
+            console.log("yes, It is true.");
+        } else {
+            console.log("No it is not true.");
+        };
+        // Q-3
+        let lower = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z";
+        console.log(lower.toLowerCase());
+        // Q-4
+        let string = ("Please give Rs 1000");
+        let cut = +string.slice(15, 18);
+        console.log("The Amount Is", cut);
+        console.log(typeof cut);
+        // Q-5
+        let word = "Hello World";
+        word[3] = "Changed";
+        console.log(word); // word is not changed, because String are immutable.
+    </script>
+</body>
+
+</html>
